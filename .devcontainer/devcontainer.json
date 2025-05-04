@@ -1,0 +1,29 @@
+{
+    "name": "Rust GUI-Enabled",
+    "image": "mcr.microsoft.com/devcontainers/rust:1-1-bullseye",
+    "customizations": {
+      "vscode": {
+        "settings": {},
+        "extensions": [
+          "streetsidesoftware.code-spell-checker"
+        ]
+      }
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,Z",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "root",
+    "postCreateCommand": "bash .devcontainer/scripts/dependencies.sh",
+    "runArgs": [
+      "--security-opt=label=disable",
+      "--userns=keep-id",
+      "--device=/dev/dri",
+      "-e", "XDG_RUNTIME_DIR=/tmp",
+      "-e", "WAYLAND_DISPLAY=${env:WAYLAND_DISPLAY}",
+      "-v", "${env:XDG_RUNTIME_DIR}/${env:WAYLAND_DISPLAY}:/tmp/${env:WAYLAND_DISPLAY}"
+    ],
+    "containerEnv": {
+      "XDG_RUNTIME_DIR": "/tmp",
+      "WAYLAND_DISPLAY": "${env:WAYLAND_DISPLAY}"
+    }  
+}
+  
